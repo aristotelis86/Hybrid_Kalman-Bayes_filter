@@ -28,21 +28,21 @@ indx_acc = find(strcmpi(args,'IntegSteps'),1);
 indx_write = find(strcmpi(args,'File'),1);
 indx_frame = find(strcmpi(args,'Limit'),1);
 
-
+% Degree of polynomial for Kalman filter.
 if ~isempty(indx_dim)    
     dim = args{indx_dim+1};
 else
     dim = 2;
 end
 
-
+% Length of history from observations (training purposes, number of values)
 if ~isempty(indx_history)
     history_index = args{indx_history+1};
 else
     history_index = 72;
 end
 
-
+% Decide whether to use Kalman with Information Geometry technique or not.
 if ~isempty(indx_KalmanIG)
     var_factor = args{indx_KalmanIG+1};
     use_kalIG_flag = 1;
@@ -50,7 +50,7 @@ else
     use_kalIG_flag = 0;
 end
 
-
+% Length of forecast (output, number of values)
 if ~isempty(indx_fcst)
     length_of_fcst = args{indx_fcst+1};
 else
@@ -86,20 +86,22 @@ else
     
 end
 
-
+% Determine accuracy for the calculation of the integrals (number of
+% divisions)
 if ~isempty(indx_acc)
     ISteps = args{indx_acc+1};
 else
     ISteps = 100;
 end
 
-
+% Create file with outputs, if needed
 if ~isempty(indx_write)
     fid = fopen(args{indx_write+1},'w');
 else
     fid = fopen('Hybrid_filter_results.txt','w');
 end
 
+% Create graphic with the results, if needed
 xlim_switch = 0;
 if ~isempty(indx_frame)
     XLIM = args{indx_frame+1};
