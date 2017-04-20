@@ -1,7 +1,15 @@
 % Function KALMAN_CUSTOM_TRAINING uses obs and mod arrays to train a Kalman
-% filter assigning values to state matrices.
+% filter assigning values to state matrices. Classic Kalman filter.
+%
+% Inputs:
+%           Tobs: observations array
+%           Tmod: model results array
+%           dim: power of the polynomial for Kalman (>1, non-linear filter)
+%           history_index: number of observations to be used as history
+%           t: variable indicating if it is a first run(=1) or not (>1)
 
-function XX = Kalman_custom_training(Tobs,Tmod1,dim,history_index,t)
+
+function XX = Kalman_custom_training(Tobs,Tmod,dim,history_index,t)
 
 persistent P  yV x_matrix x first_run
 
@@ -28,7 +36,7 @@ ID = eye(dim);
 
 for ij=1:length(Tobs)
     
-    ss = Tmod1(ij);
+    ss = Tmod(ij);
     z = Tobs(ij);
 
     y = z - ss;
@@ -46,7 +54,8 @@ for ij=1:length(Tobs)
 
         end
     end
-
+    
+    % Variance matrices
     VV = var(yV);
 
     W = cov(xV');
@@ -61,7 +70,7 @@ for ij=1:length(Tobs)
     T = H'; 
     PR = P1*T;
 
-    KG = PR./(Q1+VV);
+    KG = PR./(Q1+VV); % Kalman Gain
     
     PR = H*x;
     D = y - PR(1,1);
@@ -78,9 +87,9 @@ for ij=1:length(Tobs)
     P = PR;
 
     % yV update
-    yV_last = Tobs(ij) - Tmod1(ij);
+    yV_last = Tobs(ij) - Tmod(ij);
     for m=1:dim
-        aa = Tmod1(ij);
+        aa = Tmod(ij);
         yV_last = yV_last-x(m,1)*(aa^(m-1));
     end
 
@@ -97,6 +106,6 @@ for ij=1:length(Tobs)
 
 
 end
-
+% Kalman corrected values
 XX = x;
 end
