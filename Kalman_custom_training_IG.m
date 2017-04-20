@@ -111,6 +111,6 @@ for ij=1:length(Tobs)
 
 end
 
-% Kalman corrected values
+% Kalman state matrix
 XX = x;
 end

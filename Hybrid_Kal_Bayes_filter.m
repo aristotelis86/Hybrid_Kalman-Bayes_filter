@@ -170,6 +170,7 @@ for t=TT
             f_pr = f_pr(2:end);
         end
         
+        % Change correction filter based on a priori distribution
         switch Dist_name
 
             case 'normal'
@@ -190,7 +191,8 @@ for t=TT
                 Tmod_hybrid = Bayes_lognormal_correction(Tmod2_kal,Tobs,Tmod1,f_pr);
                 Hyb_Corr(t:t+length_of_fcst-1) = Tmod_hybrid(:);
 
-
+            % Practically, no correction here. Just copying from Kalman
+            % correction
             case 'extreme value'
 
                 Hyb_Corr(t:t+length_of_fcst-1) = Tmod2_kal(:);
@@ -199,7 +201,7 @@ for t=TT
         end
     else
         
-        % In case NO distribution is detected
+        % In case NO distribution is detected, just copy from Kalman 
         Hyb_Corr(t:t+length_of_fcst-1) = Tmod2_kal(:);
     
     end
