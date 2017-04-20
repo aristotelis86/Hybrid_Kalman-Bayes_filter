@@ -1,6 +1,6 @@
-######################################### Hybrid Kalman-Bayes filter #########################################
+############### Hybrid Kalman-Bayes filter ###########
 Hybrid filter for post-process improvement of forecasts provided by NWP (Numerical Wind/Wave Prediction) models.
-##############################################################################################################
+######################################################
 
 Brief Manual
 -------------
@@ -29,46 +29,44 @@ where model_orig and obs are the initial MODEL and OBS, respectively, but withou
 
 Options/Refinements
 
-— dim      ->   rank of the polynomial for Kalman, default value is {2} (works pretty good most of the time) 
+- dim      ->   rank of the polynomial for Kalman, default value is {2} (works pretty good most of the time) 
 
-— history    ->   change the length of the database, default value is {72}
+- history    ->   change the length of the database, default value is {72}
 
-— forecast    ->   change the length of forecast, default value is {24}
+- forecast    ->   change the length of forecast, default value is {24}
 
-— kalmanIG    ->   If this option is given, KalmanIG is used instead of original Kalman filter. The value entered is passed as the multiplication factor when calculating variance in the training procedure. 
+- kalmanIG    ->   If this option is given, KalmanIG is used instead of original Kalman filter. The value entered is passed as the multiplication factor when calculating variance in the training procedure. 
 
-— Distribution  ->   Given this option, the program is forced to use the distribution provided instead of running tests to decide which one to use. Available distributions are: Weibull, Lognormal, Normal
+- Distribution  ->   Given this option, the program is forced to use the distribution provided instead of running tests to decide which one to use. Available distributions are: Weibull, Lognormal, Normal
 
-— IntegSteps   ->    Change the accuracy of the integration during the bayesian steps. Default value is {100}. 
-*!! Important Note !!* : Higher values increase runtime of the program dramatically!
+- IntegSteps   ->    Change the accuracy of the integration during the bayesian steps. Default value is {100}. 
+#!! Important Note !!# : Higher values increase runtime of the program dramatically!
 
-— File     ->    With this option one can provide the exact path and name of the output text file.
+- File     ->    With this option one can provide the exact path and name of the output text file.
 
 
 Example with some available options and their default values:
 
 [HYB   MODEL    OBS] = Hybrid_Kal_Bayes_filter(OBS,MODEL,’dim’, 2,’history’,72,’forecast’,24,’IntegSteps’,100);
 
---- Limit   ->  This option must be followed by an array of two values indicating lower and higher values of indexes limiting the comparison figure.
+- Limit   ->  This option must be followed by an array of two values indicating lower and higher values of indexes limiting the comparison figure.
 
 [HYB   MODEL    OBS] = Hybrid_Kal_Bayes_filter(OBS,MODEL,’Limit’,[36 100]);
---------------------------------------------------------------------------------------------------------------------
 
+----------------------------------------------------------------------
 
 Other examples:
 
 [HYB   MODEL    OBS] = Hybrid_Kal_Bayes_filter(OBS,MODEL,’kalmanIG’,4.0);
 
 If kalmanIG is given without a value following it, the program crashes. If kalmanIG is not given at all, classic Kalman filter is used.
---------------------------------------------------------------------------------------------------------------------
+
 
 [HYB   MODEL    OBS] = Hybrid_Kal_Bayes_filter(OBS,MODEL,’Distribution’,’weibull’);
 
---------------------------------------------------------------------------------------------------------------------
-
 [HYB   MODEL    OBS] = Hybrid_Kal_Bayes_filter(OBS,MODEL,’file’,’/PATH/TO/FILE.TXT’);
 
---------------------------------------------------------------------------------------------------------------------
+
 
 All of the options and the according arguments are NOT case sensitive, except from the path to the text file.
 
