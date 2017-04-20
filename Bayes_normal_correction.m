@@ -7,7 +7,6 @@ model_length = length(model);
 
 mean_dbase_real = mean(dbase_real);
 sigma_dbase_real = var(dbase_real);
-% mean_error = mean(dbase_record-dbase_real);
 sigma_error = var(dbase_record-dbase_real);
 
 
@@ -21,11 +20,6 @@ for ij=1:length(model)
     
     
     % Corrected values!
-%     Interm=zeros(accuracy,1);
-%     for t=1:accuracy
-%         Interm(t) = random('norm',mean_val_predic,sqrt(sigma_predic));
-%     end
-%     PRED(ij) = mean(Interm);
     PRED(ij) = mean_val_predic;
 end
 
