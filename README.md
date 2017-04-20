@@ -1,5 +1,7 @@
 ############### Hybrid Kalman-Bayes filter ###########
+
 Hybrid filter for post-process improvement of forecasts provided by NWP (Numerical Wind/Wave Prediction) models.
+
 ######################################################
 
 Brief Manual
