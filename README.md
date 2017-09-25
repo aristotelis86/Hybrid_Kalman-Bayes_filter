@@ -3,8 +3,7 @@
 Hybrid filter for post-process improvement of forecasts provided by Numerical Wind/Wave Prediction (NWP) models.
 
 
-Overview
--------------
+## Overview
 
 The main function of the program is HYBRID_KAL_BAYES_FILTER.M. All other functions are called from the main program. Running other scripts and/or functions individually is not recommended.
 The program applies Hybrid Kalman-Bayes filter to a timeseries of forecasted values that require correction and produces output to the command line of MATLAB as well as to a txt file in the working folder.
@@ -46,15 +45,14 @@ Options/Refinements
 
 - File     ->    With this option one can provide the exact path and name of the output text file.
 
+- Limit   ->  This option must be followed by an array of two values indicating lower and higher values of indexes limiting the comparison figure. (For visualization of the results)
 
-Example call with some available options and their default values:
+
+Example calls with some available options and their default values:
 
 	[HYB,   MODEL,    OBS] = Hybrid_Kal_Bayes_filter(OBS,MODEL,’dim’, 2,’history’,72,’forecast’,24,’IntegSteps’,100);
-
-For visualization of results:
-- Limit   ->  This option must be followed by an array of two values indicating lower and higher values of indexes limiting the comparison figure.
-
-	\[HYB,   MODEL,    OBS\] = Hybrid_Kal_Bayes_filter(OBS,MODEL,’Limit’,\[36 100\]);
+	
+	[HYB,   MODEL,    OBS] = Hybrid_Kal_Bayes_filter(OBS,MODEL,’Limit’,[36 100]);
 
 Other examples:
 
