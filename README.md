@@ -7,7 +7,6 @@ Hybrid filter for post-process improvement of forecasts provided by Numerical Wi
 
 The main function of the program is HYBRID_KAL_BAYES_FILTER.M. All other functions are called from the main program. Running other scripts and/or functions individually is not recommended.
 The program applies Hybrid Kalman-Bayes filter to a timeseries of forecasted values that require correction and produces output to the command line of MATLAB as well as to a txt file in the working folder.
---------------------------------------------------------------------------------------------------------------------
 
 ### How to call it
 
