@@ -93,7 +93,7 @@ for ij=1:length(Tobs)
         yV_last = yV_last-x(m,1)*(aa^(m-1));
     end
 
-    yV = yV(1:history_index-1);
+    yV = yV(2:history_index);
     yV = [yV, yV_last];
 
     % x_matrix update
